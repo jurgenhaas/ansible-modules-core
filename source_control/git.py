@@ -990,7 +990,7 @@ def main():
         result['after'] = get_version(module, git_path, dest)
 
         if result['before'] == result['after']:
-            if local_mods:
+            if local_mods and module.check_mode:
                 result.update(changed=True, after=remote_head, msg='Local modifications exist')
                 # no diff, since the repo didn't change
                 module.exit_json(**result)
